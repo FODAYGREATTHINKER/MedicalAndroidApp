@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_user"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:textSize="24sp"/>
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="299dp"
+                android:layout_height="wrap_content">
+                <EditText
+                        android:layout_width="299dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/editUsernameText"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:hint="@string/editUsernameText"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="299dp"
+                android:layout_height="wrap_content">
+                <EditText
+                        android:layout_width="299dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/editPasswordText"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:hint="@string/editPasswordText"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="299dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                        android:layout_width="299dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/editConfirmPasswordText"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:hint="@string/editConfirmPasswordText"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+                android:textColor="#fff"
+                android:background="@color/colorPrimary"
+                android:layout_width="299dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sign_up_button"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="@string/sign_up_button"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                android:id="@+id/return_to_login_text_view"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="@string/return_to_login_text_view"
+                android:textSize="18sp"/>
+
+
+</LinearLayout>
