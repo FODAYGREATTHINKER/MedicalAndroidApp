@@ -6,84 +6,80 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="24dp"
-                android:text="@string/editUsernameText"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/editUsernameText"/>
+                android:text="@string/create_user"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:textSize="24sp"/>
 
-    </LinearLayout>
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="299dp"
+                android:layout_height="wrap_content">
+                <EditText
+                        android:layout_width="299dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/editUsernameText"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:hint="@string/editUsernameText"/>
 
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="24dp"
-                android:text="@string/editPasswordText"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/editPasswordText"/>
+        </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="299dp"
+                android:layout_height="wrap_content">
+                <EditText
+                        android:layout_width="299dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/editPasswordText"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:hint="@string/editPasswordText"/>
 
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="24dp"
-                android:text="@string/editConfirmPasswordText"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/editConfirmPasswordText"/>
+        </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="299dp"
+                android:layout_height="wrap_content">
 
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+                <EditText
+                        android:layout_width="299dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/editConfirmPasswordText"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:hint="@string/editConfirmPasswordText"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
         <Button
-                android:layout_width="wrap_content"
+                android:textColor="#fff"
+                android:background="@color/colorPrimary"
+                android:layout_width="299dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/sign_up_button"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:text="@string/sign_up_button"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="24dp"
                 android:id="@+id/return_to_login_text_view"
-                android:text="@string/return_to_login_text_view"/>
-
-    </LinearLayout>
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="@string/return_to_login_text_view"
+                android:textSize="18sp"/>
 
 
 </LinearLayout>

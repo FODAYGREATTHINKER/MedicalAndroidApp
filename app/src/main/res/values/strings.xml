@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">MedicalApplication</string>
+    <string name="title">CheckUp</string>
     <string name="user_name">user1</string>
     <string name="user_pword">password</string>
     <string name="sign_in_button">Sign In</string>
-    <string name="sign_up_text_view">Sign Up Here</string>
-    <string name="editPasswordText">Enter Password:</string>
-    <string name="editConfirmPasswordText">Confirm Password:</string>
-    <string name="editUsernameText">Enter Username:</string>
+    <string name="sign_up_text_view">No account yet? Create one!</string>
+    <string name="editPasswordText">Password</string>
+    <string name="editConfirmPasswordText">Confirm Password</string>
+    <string name="editUsernameText">Username</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="return_to_login_text_view">Return To Login</string>
     <string name="log_in_toast">Signed In!</string>
     <string name="sign_up_toast">Signed Up!</string>
+    <string name="create_user">Create New Account</string>
 </resources>
