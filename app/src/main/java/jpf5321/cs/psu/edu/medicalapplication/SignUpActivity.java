@@ -38,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
                 // create user
                 username = editUsername.getText().toString();
                 password = editPassword.getText().toString();
-                User user = new User(username, password);
+                SecureUserPassword user = new SecureUserPassword(username, password);
                 int messageResId = R.string.sign_up_toast;
                 Toast.makeText(SignUpActivity.this, messageResId, Toast.LENGTH_SHORT).show();
             }

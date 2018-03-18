@@ -2,30 +2,42 @@ package jpf5321.cs.psu.edu.medicalapplication;
 
 public class User {
 
-    private String userName;
-    private String passWord;
+    private String username;
+    private String firstname;
+    private String lastname;
+    private String email;
 
-    public User(String uName, String pWord)
-    {
-        userName = uName;
-        passWord = pWord;
+
+    //Setters and Getters
+    public String getUsername() {
+        return username;
     }
 
-    public String getUserName()
-    {
-        return userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPassWord()
-    {
-        return passWord;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
