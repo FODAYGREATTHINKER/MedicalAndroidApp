@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="jpf5321.cs.psu.edu.medicalapplication.RecordActivity">
+
+    <TextView
+            android:id="@+id/record_text_view"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:id="@+id/show_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_record"
+            android:gravity="bottom"
+            android:layout_gravity="center_horizontal"/>
+    <Button
+            android:id="@+id/create_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_record"
+            android:gravity="bottom"
+            android:layout_gravity="center_horizontal"/>
+    <Button
+            android:id="@+id/update_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_record"
+            android:gravity="bottom"
+            android:layout_gravity="center_horizontal"/>
+    <Button
+            android:id="@+id/delete_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_record"
+            android:gravity="bottom"
+            android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

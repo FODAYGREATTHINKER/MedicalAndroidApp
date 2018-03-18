@@ -10,7 +10,20 @@
     <string name="editUsernameText">Username</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="return_to_login_text_view">Return To Login</string>
-    <string name="log_in_toast">Signed In!</string>
+    <string name="successful_log_in_toast">Signed In!</string>
+    <string name="failed_log_in_toast">Incorrect Password or Username :(</string>
     <string name="sign_up_toast">Signed Up!</string>
     <string name="create_user">Create New Account</string>
+    <string name="menu_open">Open</string>
+    <string name="menu_close">Close</string>
+    <string name="show_record">Show Existing Record</string>
+    <string name="create_record">Create New Record</string>
+    <string name="update_record">Update Existing Record</string>
+    <string name="delete_record">Delete Existing Record</string>
+    <string name="birth_date">Birth Date:</string>
+    <string name="last_visit">Last Visit:</string>
+    <string name="allergies">Allergies:</string>
+    <string name="medications">Medications:</string>
+    <string name="surgeries">Surgeries:</string>
+
 </resources>
