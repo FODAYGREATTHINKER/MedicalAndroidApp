@@ -25,5 +25,6 @@
     <string name="allergies">Allergies:</string>
     <string name="medications">Medications:</string>
     <string name="surgeries">Surgeries:</string>
+    <string name="send">Send</string>
 
 </resources>
