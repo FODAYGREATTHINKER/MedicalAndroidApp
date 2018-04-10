@@ -85,7 +85,7 @@ public class CreateRecordActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer integer) {
-            Toast.makeText(CreateRecordActivity.this, "New Record Created" + integer.toString(), Toast.LENGTH_SHORT). show();
+            Toast.makeText(CreateRecordActivity.this, R.string.record_created, Toast.LENGTH_SHORT). show();
         }
     }
 

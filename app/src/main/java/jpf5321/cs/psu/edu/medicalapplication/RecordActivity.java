@@ -85,6 +85,8 @@ public class RecordActivity extends AppCompatActivity {
         });
     }
 
+
+    //Get Current Record
     private class HttpGetTask extends AsyncTask<Void, Void, SecureRecords>{
 
         @Override
@@ -98,7 +100,7 @@ public class RecordActivity extends AppCompatActivity {
                 SecureRecords record = restTemplate.getForObject(URL, SecureRecords.class);
                 return record;
             } catch (Exception e) {
-                Log.e("Record Endpoint", e.getMessage(), e);
+                Log.e("Record Endpoint GET", e.getMessage(), e);
             }
 
             return null;
@@ -120,6 +122,9 @@ public class RecordActivity extends AppCompatActivity {
     }
 
 
+
+
+    //Delete Current Record
     private class HttpDeleteTask extends AsyncTask<Void, Void, Integer>{
         @Override
         protected Integer doInBackground(Void... params){
@@ -130,13 +135,14 @@ public class RecordActivity extends AppCompatActivity {
                 restTemplate.delete(URL);
 
             } catch (Exception e){
-                Log.e("Record Endpoint", e.getMessage(), e);
+                Log.e("Record Endpoint DELETE", e.getMessage(), e);
             }
             return null;
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
+            recordTextView.setText("");
             Toast.makeText(RecordActivity.this, "Record Deleted" , Toast.LENGTH_SHORT). show();
 
         }

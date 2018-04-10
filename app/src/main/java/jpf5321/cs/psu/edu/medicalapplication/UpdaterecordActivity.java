@@ -68,7 +68,7 @@ public class UpdaterecordActivity extends AppCompatActivity {
             //CODE FOR PUT (NOTE: Delete is the same thing, but the method is called delete)
             try
             {
-                final String URL = "http://10.0.2.2:8080/UpdateMedicalRecord?user=" + userId;
+                final String URL = "http://10.0.2.2:8080UpdateMedicalRecord?user=" + userId;
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 restTemplate.put(URL, new SecureRecords( params[0].getBirthDate(), params[0].getAllergies(), params[0].getMedications(), params[0].getSurgeries(), params[0].getLastVisit() ));
@@ -86,7 +86,7 @@ public class UpdaterecordActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer integer) {
-            Toast.makeText(UpdaterecordActivity.this, "Record Was Updated" , Toast.LENGTH_SHORT). show();
+            Toast.makeText(UpdaterecordActivity.this, R.string.record_updated , Toast.LENGTH_SHORT). show();
         }
 
     }
