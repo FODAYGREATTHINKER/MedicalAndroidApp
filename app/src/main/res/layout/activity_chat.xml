@@ -17,7 +17,9 @@
 
         <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:layout_weight="0.99"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="0.99"
+                android:id="@+id/message_text"/>
 
         <Button
                 android:layout_width="wrap_content"
