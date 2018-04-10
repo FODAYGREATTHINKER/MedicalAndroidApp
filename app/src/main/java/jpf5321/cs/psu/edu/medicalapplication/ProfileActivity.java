@@ -64,6 +64,14 @@ public class ProfileActivity extends AppCompatActivity {
                             startActivity(recordIntent);
                         break;
 
+                    case R.id.nav_chat:
+                            Intent chatIntent = new Intent(ProfileActivity.this, ChatActivity.class);
+                            chatIntent.putExtra("KEY_ID", userId);
+                            chatIntent.putExtra("KEY_FNAME", fName);
+                            chatIntent.putExtra("KEY_LNAME", lName);
+                            startActivity(chatIntent);
+                        break;
+
                     case R.id.nav_settings:
 
                         break;

@@ -25,5 +25,8 @@
     <string name="allergies">Allergies:</string>
     <string name="medications">Medications:</string>
     <string name="surgeries">Surgeries:</string>
+    <string name="send">Send</string>
+    <string name="failed_send_toast">Failed To Send</string>
+    <string name="successful_send_toast">Message Sent</string>
 
 </resources>
