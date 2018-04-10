@@ -1,5 +1,6 @@
 package jpf5321.cs.psu.edu.medicalapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,19 @@ public class CreateRecordActivity extends AppCompatActivity {
     private String surgeriesTemp;
 
     private Button createRecordButton;
+
+    private static final String EXTRA_ANSWER_IS_TRUE = "jpf5321.cs.psu.edu.medical.answer_is_true";
+    private static final String EXTRA_ANSWER_SHOWN = "jpf5321.cs.psu.edu.medical.answer_shown";
+
+    public  static Intent newIntent(Context packageContext, int answer){
+        Intent intent = new Intent(packageContext, CreateRecordActivity.class);
+        intent.putExtra(EXTRA_ANSWER_IS_TRUE, answer);
+        return intent;
+    }
+
+    public static  int Answer(Intent result){
+        return result.getIntExtra(EXTRA_ANSWER_SHOWN, 0);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +70,10 @@ public class CreateRecordActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
 
 
     private class HttpPostTask extends AsyncTask<SecureRecords, Void, Integer>
@@ -69,11 +86,11 @@ public class CreateRecordActivity extends AppCompatActivity {
             //CODE FOR POST
             try
             {
-                final String URL = "http://10.0.2.2:8080/CreateMedicalRecord?user=" + userId;
+                final String URL = "http://10.0.2.2:8080/CreateMedicalRecord";
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 integer = restTemplate.postForObject( URL, new SecureRecords(params[0].getBirthDate(), params[0].getAllergies(), params[0].getMedications(), params[0].getSurgeries(), params[0].getLastVisit() ), Integer.class);
-
+                System.out.println(integer.toString());
 
             } catch (Exception e) {
                 Log.e("PostActivity", e.getMessage(), e);
@@ -85,7 +102,11 @@ public class CreateRecordActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer integer) {
+            Intent data = new Intent();
+            data.putExtra(EXTRA_ANSWER_SHOWN, integer);
+            setResult(RESULT_OK, data);
             Toast.makeText(CreateRecordActivity.this, R.string.record_created, Toast.LENGTH_SHORT). show();
+            finish();
         }
     }
 

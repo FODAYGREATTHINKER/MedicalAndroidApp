@@ -121,7 +121,12 @@ public class ChatActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Chat chat) {
-            messageToReceive = chat.getMessage();
+            if(chat != null){
+                messageToReceive = chat.getMessage();
+            }
+            else{
+                Toast.makeText(ChatActivity.this, R.string.message_not_found, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

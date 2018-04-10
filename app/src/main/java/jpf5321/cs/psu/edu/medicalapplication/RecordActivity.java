@@ -1,5 +1,6 @@
 package jpf5321.cs.psu.edu.medicalapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 public class RecordActivity extends AppCompatActivity {
 
     private int userId;
+    private int recordId;
     private String fName;
     private String lName;
     private String birthDate;
@@ -33,6 +35,8 @@ public class RecordActivity extends AppCompatActivity {
     private Button deleteRecordButton;
     private TextView recordTextView;
 
+    public static final int CREATE_RECORD_REQUEST_CODE=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,7 @@ public class RecordActivity extends AppCompatActivity {
             userId = (int) bd.get("KEY_ID");
             fName = (String) bd.get("KEY_FNAME");
             lName = (String) bd.get("KEY_LNAME");
+            recordId = userId;
         }
 
         showRecordButton = findViewById(R.id.show_record_button);
@@ -62,7 +67,7 @@ public class RecordActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(RecordActivity.this, CreateRecordActivity.class);
                 intent.putExtra("KEY_ID", userId);
-                startActivity(intent);
+                startActivityForResult(intent, CREATE_RECORD_REQUEST_CODE);
             }
         });
 
@@ -72,6 +77,7 @@ public class RecordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RecordActivity.this, UpdaterecordActivity.class);
                 intent.putExtra("KEY_ID", userId);
+                intent.putExtra("KEY_RECORD_ID", recordId);
                 startActivity(intent);
             }
         });
@@ -94,7 +100,7 @@ public class RecordActivity extends AppCompatActivity {
 
             try
             {
-                final String URL = "http://10.0.2.2:8080/MedicalRecords?user=" + Integer.toString(userId);
+                final String URL = "http://10.0.2.2:8080/MedicalRecords?user=" + Integer.toString(recordId);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 SecureRecords record = restTemplate.getForObject(URL, SecureRecords.class);
@@ -107,17 +113,21 @@ public class RecordActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(SecureRecords record) {
-            birthDate = record.getBirthDate();
-            lastVisit = record.getLastVisit();
-            allergies = record.getAllergies();
-            medications = record.getMedications();
-            surgeries = record.getSurgeries();
+            if(record != null){
+                birthDate = record.getBirthDate();
+                lastVisit = record.getLastVisit();
+                allergies = record.getAllergies();
+                medications = record.getMedications();
+                surgeries = record.getSurgeries();
 
-            recordTextView = findViewById(R.id.record_text_view);
-            recordTextView.setText("Medical Record for, " + fName + lName + "\nYour last visit was on: " + lastVisit +
-            "\nBirth date: " + birthDate + "\nKnown allergies: " + Arrays.toString(allergies) + "\nMedications: " + Arrays.toString(medications) +
-            "\nCompleted surgeries: " + Arrays.toString(surgeries));
-
+                recordTextView = findViewById(R.id.record_text_view);
+                recordTextView.setText("Medical Record for, " + fName + lName + "\nYour last visit was on: " + lastVisit +
+                        "\nBirth date: " + birthDate + "\nKnown allergies: " + Arrays.toString(allergies) + "\nMedications: " + Arrays.toString(medications) +
+                        "\nCompleted surgeries: " + Arrays.toString(surgeries));
+            }
+            else{
+                Toast.makeText(RecordActivity.this, R.string.record_not_found , Toast.LENGTH_SHORT). show();
+            }
         }
     }
 
@@ -129,7 +139,7 @@ public class RecordActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Void... params){
             try{
-                final String URL = "http://10.0.2.2:8080/DeleteMedicalRecord?user=" + Integer.toString(userId);
+                final String URL = "http://10.0.2.2:8080/DeleteMedicalRecord?user=" + Integer.toString(recordId);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 restTemplate.delete(URL);
@@ -143,10 +153,25 @@ public class RecordActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer integer) {
             recordTextView.setText("");
-            Toast.makeText(RecordActivity.this, "Record Deleted" , Toast.LENGTH_SHORT). show();
+            Toast.makeText(RecordActivity.this, R.string.record_deleted , Toast.LENGTH_SHORT). show();
 
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (resultCode != Activity.RESULT_OK){
+            return;
+        }
+        if(requestCode == CREATE_RECORD_REQUEST_CODE){
+            if(data == null){
+                return;
+            }
+            recordId = CreateRecordActivity.Answer(data);
+        }
+    }
 }
+
+
 
 
