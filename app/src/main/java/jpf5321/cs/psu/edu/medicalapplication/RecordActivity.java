@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.style.UpdateAppearance;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,11 +32,14 @@ public class RecordActivity extends AppCompatActivity {
     private String[] surgeries;
     private String lastVisit;
 
-    private Button showRecordButton;
-    private Button createRecordButton;
-    private Button updateRecordButton;
-    private Button deleteRecordButton;
-    private TextView recordTextView;
+    private Boolean hasRecord = false;
+
+    private TextView recordNameTextView;
+    private TextView recordBirthTextView;
+    private TextView recordLastVisitTextView;
+    private TextView recordMedicatioTextView;
+    private TextView recordAllergyTextView;
+    private TextView recordSurgeryTextView;
 
     public static final int CREATE_RECORD_REQUEST_CODE=0;
 
@@ -51,46 +57,59 @@ public class RecordActivity extends AppCompatActivity {
             lName = (String) bd.get("KEY_LNAME");
             recordId = userId;
         }
-
-        showRecordButton = findViewById(R.id.show_record_button);
-        showRecordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new HttpGetTask().execute();
-            }
-        });
-
-        createRecordButton = findViewById(R.id.create_record_button);
-        createRecordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(RecordActivity.this, CreateRecordActivity.class);
-                intent.putExtra("KEY_ID", userId);
-                startActivityForResult(intent, CREATE_RECORD_REQUEST_CODE);
-            }
-        });
-
-        updateRecordButton = findViewById(R.id.update_record_button);
-        updateRecordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecordActivity.this, UpdaterecordActivity.class);
-                intent.putExtra("KEY_ID", userId);
-                intent.putExtra("KEY_RECORD_ID", recordId);
-                startActivity(intent);
-            }
-        });
-
-        deleteRecordButton = findViewById(R.id.delete_record_button);
-        deleteRecordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new HttpDeleteTask().execute();
-            }
-        });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.medical_record, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent;
+        switch(item.getItemId()){
+            case R.id.show_record_menu:
+                new HttpGetTask().execute();
+                return true;
+            case R.id.new_record_menu:
+                intent = new Intent(RecordActivity.this, CreateRecordActivity.class);
+                intent.putExtra("KEY_ID", userId);
+                startActivityForResult(intent, CREATE_RECORD_REQUEST_CODE);
+                return true;
+            case R.id.update_record_menu:
+                intent = new Intent(RecordActivity.this, UpdaterecordActivity.class);
+                intent.putExtra("KEY_ID", userId);
+                intent.putExtra("KEY_DOB", birthDate);
+                intent.putExtra("KEY_LAST_VISIT", lastVisit);
+                intent.putExtra("KEY_MEDICATIONS", medications);
+                intent.putExtra("KEY_ALLERGIES", allergies);
+                intent.putExtra("KEY_SURGERIES", surgeries);
+                intent.putExtra("KEY_RECORD_ID", recordId);
+                startActivityForResult(intent, CREATE_RECORD_REQUEST_CODE);
+                return true;
+            case R.id.delete_record_menu:
+                new HttpDeleteTask().execute();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(hasRecord == false){
+            menu.findItem(R.id.update_record_menu).setEnabled(false);
+            menu.findItem(R.id.delete_record_menu).setEnabled(false);
+        }
+        else{
+            menu.findItem(R.id.update_record_menu).setEnabled(true);
+            menu.findItem(R.id.delete_record_menu).setEnabled(true);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+
+    }
 
     //Get Current Record
     private class HttpGetTask extends AsyncTask<Void, Void, SecureRecords>{
@@ -120,12 +139,26 @@ public class RecordActivity extends AppCompatActivity {
                 medications = record.getMedications();
                 surgeries = record.getSurgeries();
 
-                recordTextView = findViewById(R.id.record_text_view);
-                recordTextView.setText("Medical Record for, " + fName + lName + "\nYour last visit was on: " + lastVisit +
-                        "\nBirth date: " + birthDate + "\nKnown allergies: " + Arrays.toString(allergies) + "\nMedications: " + Arrays.toString(medications) +
-                        "\nCompleted surgeries: " + Arrays.toString(surgeries));
+                recordNameTextView = findViewById(R.id.record_name_text_view);
+                recordBirthTextView = findViewById(R.id.record_birth_text_view);
+                recordLastVisitTextView = findViewById(R.id.record_last_visit_text_view);
+                recordMedicatioTextView = findViewById(R.id.record_medications_contents_text_view);
+                recordAllergyTextView = findViewById(R.id.record_allergies_contents_text_view);
+                recordSurgeryTextView = findViewById(R.id.record_surgery_contents_text_view);
+
+                recordNameTextView.setText("Medical Record for, " + fName + " " + lName);
+                recordBirthTextView.setText("\tDate of Birth: " + birthDate );
+                recordLastVisitTextView.setText("\tLast Visit: " + lastVisit);
+                recordMedicatioTextView.setText(Arrays.toString(medications).replace("[", "").replace("]", ""));
+                recordAllergyTextView.setText(Arrays.toString(allergies).replace("[", "").replace("]", ""));
+                recordSurgeryTextView.setText(Arrays.toString(surgeries).replace("[", "").replace("]", ""));
+
+                hasRecord = true;
+                invalidateOptionsMenu();
             }
             else{
+                hasRecord = false;
+                invalidateOptionsMenu();
                 Toast.makeText(RecordActivity.this, R.string.record_not_found , Toast.LENGTH_SHORT). show();
             }
         }
@@ -152,7 +185,12 @@ public class RecordActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer integer) {
-            recordTextView.setText("");
+            recordNameTextView.setText("Medical Record for, ");
+            recordBirthTextView.setText("\tDate of Birth: ");
+            recordLastVisitTextView.setText("\tLast Visit: ");
+            recordMedicatioTextView.setText("");
+            recordAllergyTextView.setText("");
+            recordSurgeryTextView.setText("");
             Toast.makeText(RecordActivity.this, R.string.record_deleted , Toast.LENGTH_SHORT). show();
 
         }
@@ -168,6 +206,7 @@ public class RecordActivity extends AppCompatActivity {
                 return;
             }
             recordId = CreateRecordActivity.Answer(data);
+            new HttpGetTask().execute();
         }
     }
 }
