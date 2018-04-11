@@ -9,7 +9,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -23,6 +26,11 @@ public class ProfileActivity extends AppCompatActivity {
     private int userId;
 
     private TextView welcomeTextView;
+    private ImageButton recordButton;
+    private ImageButton chatButton;
+    private ImageButton payButton;
+    private ImageButton settingsButton;
+    private ImageButton logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +49,52 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         welcomeTextView = findViewById(R.id.welcome_text_view);
-        welcomeTextView.setText("Welcome, " + uName + "\nUse the menu in the top left corner to navigate");
+        welcomeTextView.setText("Welcome Back, " + uName + ". We hope you're still feeling well since your last visit!");
+
+        recordButton = findViewById(R.id.record_button);
+        chatButton = findViewById(R.id.chat_button);
+        payButton = findViewById(R.id.pay_button);
+        settingsButton = findViewById(R.id.settings_button);
+        logoutButton = findViewById(R.id.logout_button);
+
+        recordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent recordIntent = new Intent(ProfileActivity.this, RecordActivity.class);
+                recordIntent.putExtra("KEY_ID", userId);
+                recordIntent.putExtra("KEY_FNAME", fName);
+                recordIntent.putExtra("KEY_LNAME", lName);
+                startActivity(recordIntent);
+            }
+        });
+        chatButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent chatIntent = new Intent(ProfileActivity.this, ChatActivity.class);
+                        chatIntent.putExtra("KEY_ID", userId);
+                        chatIntent.putExtra("KEY_FNAME", fName);
+                        chatIntent.putExtra("KEY_LNAME", lName);
+                        startActivity(chatIntent);
+                    }
+                });
+        payButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(ProfileActivity.this, "Not Yet Implemented", Toast.LENGTH_SHORT). show();
+                    }
+                });
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(ProfileActivity.this, "Not Yet Implemented", Toast.LENGTH_SHORT). show();
+                    }
+                });
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.menu_open, R.string.menu_close);

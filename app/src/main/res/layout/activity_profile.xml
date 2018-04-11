@@ -8,18 +8,71 @@
         tools:context="jpf5321.cs.psu.edu.medicalapplication.ProfileActivity"
         android:id="@+id/drawer_layout">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="WELCOME"
-                    android:id="@+id/welcome_text_view"/>
+        <ImageView android:layout_width="120dp" android:layout_height="118dp" android:src="@drawable/app_logo"
+                   app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
+                   app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                   android:id="@+id/imageView"/>
 
-    </LinearLayout>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="WELCOME"
+                android:id="@+id/welcome_text_view" android:textSize="24sp"
+                android:layout_marginTop="8dp" app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"/>
+
+        <ImageButton android:id="@+id/record_button" android:layout_width="0dp"
+                     android:layout_height="100dp" android:src="@drawable/ic_record"
+                     android:scaleType="fitCenter"
+                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                     app:layout_constraintEnd_toStartOf="@+id/chat_button" android:layout_marginEnd="8dp"
+                     android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView"
+                     app:layout_constraintBottom_toTopOf="@+id/pay_button" android:layout_marginBottom="8dp"/>
+        <ImageButton android:id="@+id/chat_button" android:layout_width="0dp"
+                     android:layout_height="100dp" android:src="@drawable/ic_message"
+                     android:scaleType="fitCenter"
+                     android:layout_marginTop="8dp"
+                     app:layout_constraintTop_toBottomOf="@+id/imageView"
+                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                     app:layout_constraintStart_toEndOf="@+id/record_button" android:layout_marginStart="8dp"
+                     app:layout_constraintBottom_toTopOf="@+id/pay_button" android:layout_marginBottom="8dp"/>
+        <ImageButton android:id="@+id/settings_button" android:layout_width="0dp"
+                     android:layout_height="0dp" android:src="@drawable/ic_settings"
+                     android:scaleType="fitCenter"
+                     app:srcCompat="@drawable/ic_settings"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     android:layout_marginEnd="8dp"
+                     app:layout_constraintStart_toStartOf="parent"
+                     android:layout_marginStart="8dp"
+                     app:layout_constraintBottom_toTopOf="@+id/logout_button"
+                     app:layout_constraintHorizontal_bias="0.0" android:layout_marginBottom="8dp"
+                     android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/pay_button"/>
+        <ImageButton android:id="@+id/logout_button" android:layout_width="0dp"
+                     android:layout_height="0dp" android:src="@drawable/ic_logout"
+                     android:scaleType="fitCenter"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                     android:layout_marginStart="8dp"
+                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+                     android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/settings_button"/>
+        <ImageButton android:id="@+id/pay_button" android:layout_width="0dp"
+                     android:layout_height="0dp" android:src="@drawable/ic_pay"
+                     android:scaleType="fitCenter"
+                     app:layout_constraintStart_toStartOf="parent"
+                     android:layout_marginStart="8dp"
+                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                     app:layout_constraintHorizontal_bias="0.0" android:layout_marginBottom="8dp"
+                     app:layout_constraintBottom_toTopOf="@+id/settings_button"
+                     app:layout_constraintTop_toBottomOf="@+id/record_button" android:layout_marginTop="8dp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
 
     <android.support.design.widget.NavigationView
             android:layout_width="wrap_content"
@@ -27,6 +80,6 @@
             app:menu="@menu/navigation_menu"
             android:layout_gravity="start"
             android:id="@+id/profile_nav_view">
-
     </android.support.design.widget.NavigationView>
+
 </android.support.v4.widget.DrawerLayout>
