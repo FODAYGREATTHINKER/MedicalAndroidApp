@@ -25,7 +25,10 @@ public class ChatActivity extends AppCompatActivity {
     public EditText messageText;
     public String messageToSend;
     public String messageToReceive;
-    public int messageToReceiveNumber = 0; // arbitrary message
+    public int messageToReceiveNumber = 1; // arbitrary message
+
+    private TextView mTextView1;
+    private TextView mTextView2;
 
 
     @Override
@@ -52,15 +55,24 @@ public class ChatActivity extends AppCompatActivity {
                 Chat chat = new Chat();
                 chat.setMessage(messageToSend);
                 new HttpPostTask().execute(chat);
+                messageText.setText("");
             }
         });
-        new HttpGetTask().execute();
-        updateDisplay(messageToReceive, 0);
+
     }
+
+
 
     public void updateDisplay(String message, int sentOrReceived)
     {
-        // show message on screen -- left side if received -- right side if sent
+       mTextView1 = findViewById(R.id.chat_text_view1);
+       mTextView2 = findViewById(R.id.chat_text_view2);
+       if(sentOrReceived == 0){
+           mTextView1.append(String.format("\n%-1s\n", message));
+       }
+       else{
+           mTextView2.append(String.format("%1s\n\n", message));
+       }
 
     }
 
@@ -91,10 +103,12 @@ public class ChatActivity extends AppCompatActivity {
                 int messageResId = R.string.failed_send_toast;
                 Toast.makeText(ChatActivity.this, messageResId, Toast.LENGTH_SHORT).show();
 
-            } else {
+            }else {
                 int messageResId = R.string.successful_send_toast;
                 Toast.makeText(ChatActivity.this, messageResId, Toast.LENGTH_SHORT).show();
+                messageToReceiveNumber = integer;
                 updateDisplay(messageToSend, 1);
+                new HttpGetTask().execute();
             }
         }
 
@@ -123,10 +137,12 @@ public class ChatActivity extends AppCompatActivity {
         protected void onPostExecute(Chat chat) {
             if(chat != null){
                 messageToReceive = chat.getMessage();
+                updateDisplay(messageToReceive, 0);
             }
             else{
                 Toast.makeText(ChatActivity.this, R.string.message_not_found, Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 }
