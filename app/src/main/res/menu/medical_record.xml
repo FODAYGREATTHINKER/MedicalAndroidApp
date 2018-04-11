@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/new_record_menu"
+            android:icon="@drawable/ic_add"
+            android:title="@string/create_record"
+            app:showAsAction="always|withText"/>
+
+    <item
+            android:id="@+id/show_record_menu"
+            android:icon="@drawable/ic_refresh"
+            android:title="@string/show_record"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/update_record_menu"
+            android:title="@string/update_record"
+            app:showAsAction="ifRoom"/>
+    <item
+            android:id="@+id/delete_record_menu"
+            android:title="@string/delete_record"
+            app:showAsAction="ifRoom"/>
+
+</menu>

@@ -140,20 +140,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
-//CODE FOR PUT (NOTE: Delete is the same thing, but the method is called delete)
-//            try
-//            {
-//                final String URL = "http://10.0.2.2:8080/put?id=" + params[0].getId();
-//                RestTemplate restTemplate = new RestTemplate();
-//                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-//                restTemplate.put(URL, new Greeting( params[0].getId(), params[0].getContent() ));
-//
-//                integer = 200; //put won't return a value so have to just say 200 for OK
-//
-//
-//            } catch (Exception e) {
-//                Log.e("PostActivity", e.getMessage(), e);
-//                integer = 404; //something went wrong
-//            }

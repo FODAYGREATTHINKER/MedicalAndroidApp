@@ -22,13 +22,21 @@
     <string name="delete_record">Delete Existing Record</string>
     <string name="birth_date">Birth Date:</string>
     <string name="last_visit">Last Visit:</string>
-    <string name="allergies">Allergies:</string>
-    <string name="medications">Medications:</string>
-    <string name="surgeries">Surgeries:</string>
+    <string name="allergies">Allergies: (separate with commas)</string>
+    <string name="medications">Medications: (separate with commas)</string>
+    <string name="surgeries">Surgeries: (separate with commas)</string>
     <string name="send">Send</string>
     <string name="failed_send_toast">Failed To Send</string>
     <string name="successful_send_toast">Message Sent</string>
     <string name="record_not_found">No record found. Try creating a new one.</string>
     <string name="record_updated">Record Was Updated</string>
     <string name="record_created">New Record Created</string>
+    <string name="record_deleted">Record Deleted</string>
+    <string name="message_not_found">No New Message(s) at this time</string>
+    <string name="medications_title">Medications:</string>
+    <string name="allergies_title">Known Allergies:</string>
+    <string name="surgeries_title">Completed Surgeries:</string>
+    <string name="record_title">Medical Record for, </string>
+    <string name="date_of_birth_title">\tDate of Birth: </string>
+    <string name="last_visit_title">\tLast Visit: </string>
 </resources>

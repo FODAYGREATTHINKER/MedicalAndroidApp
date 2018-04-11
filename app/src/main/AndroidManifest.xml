@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".CreateRecordActivity">
         </activity>
+        <activity android:name=".ChatActivity">
+        </activity>
     </application>
 
 </manifest>
