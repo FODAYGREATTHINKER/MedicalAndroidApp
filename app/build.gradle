@@ -12,6 +12,9 @@ dependencies {
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services-fitness:11.6.0'
+    compile 'com.google.android.gms:play-services-auth:11.6.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }
 
 android {
@@ -44,6 +47,8 @@ android {
         exclude 'META-INF/LGPL2.1'
     }
 }
+
+
 
 
 

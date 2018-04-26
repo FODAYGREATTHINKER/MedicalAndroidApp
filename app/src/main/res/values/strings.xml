@@ -36,7 +36,11 @@
     <string name="medications_title">Medications:</string>
     <string name="allergies_title">Known Allergies:</string>
     <string name="surgeries_title">Completed Surgeries:</string>
-    <string name="record_title">Medical Record for, </string>
-    <string name="date_of_birth_title">\tDate of Birth: </string>
-    <string name="last_visit_title">\tLast Visit: </string>
+    <string name="record_title">Medical Record for,</string>
+    <string name="date_of_birth_title">\tDate of Birth:</string>
+    <string name="last_visit_title">\tLast Visit:</string>
+    <string name="intro_text">Behold, a data dump from the Fitness API! Check the menu for more actions!</string>
+    <string name="action_update_session">Update step count data</string>
+    <string name="action_delete_session">Delete step count data</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -80,7 +80,8 @@ public class ProfileActivity extends AppCompatActivity {
         payButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(ProfileActivity.this, "Not Yet Implemented", Toast.LENGTH_SHORT). show();
+                        Intent fitIntent = new Intent(ProfileActivity.this, GoogleFitActivity.class);
+                        startActivity(fitIntent);
                     }
                 });
         settingsButton.setOnClickListener(new View.OnClickListener() {
