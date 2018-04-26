@@ -11,10 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.json.JSONObject;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import android.support.v7.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -85,7 +88,7 @@ public class ChatActivity extends AppCompatActivity {
 
             try
             {
-                final String URL = "http://10.0.2.2:8080/SendMessage";
+                final String URL = "http://10.0.2.2:8080/SendMessage?user="+Integer.toString(userId);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 integer = restTemplate.postForObject(URL, params[0], Integer.class);
@@ -121,10 +124,12 @@ public class ChatActivity extends AppCompatActivity {
 
             try
             {
-                final String URL = "http://10.0.2.2:8080/GetMessage?MessageNumber=" + Integer.toString(messageToReceiveNumber);
+                final String URL = "http://10.0.2.2:8080/GetMessage?user=" + Integer.toString(userId);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Chat chat = restTemplate.getForObject( URL, Chat.class);
+                ArrayList<String> msgList = restTemplate.getForObject(URL, ArrayList.class);
+                Chat chat = new Chat();
+                chat.setMessage(msgList.get(msgList.size()-1).replace("{\"message\":\"", "").replace("\"}", ""));
                 return chat;
             } catch (Exception e) {
                 Log.e("Login Endpoint", e.getMessage(), e);
