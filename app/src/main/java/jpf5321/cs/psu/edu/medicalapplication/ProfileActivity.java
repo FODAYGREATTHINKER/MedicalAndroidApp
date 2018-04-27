@@ -77,17 +77,23 @@ public class ProfileActivity extends AppCompatActivity {
                         startActivity(chatIntent);
                     }
                 });
-        payButton.setOnClickListener(new View.OnClickListener() {
+        settingsButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent fitIntent = new Intent(ProfileActivity.this, GoogleFitActivity.class);
                         startActivity(fitIntent);
                     }
                 });
-        settingsButton.setOnClickListener(new View.OnClickListener() {
+        payButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(ProfileActivity.this, "Not Yet Implemented", Toast.LENGTH_SHORT). show();
+                        Intent payIntent = new Intent(ProfileActivity.this, PaymentActivity.class);
+                        payIntent.putExtra("KEY_ID", userId);
+                        payIntent.putExtra("KEY_EMAIL", email);
+                        payIntent.putExtra("KEY_FNAME", fName);
+                        payIntent.putExtra("KEY_UNAME", uName);
+                        payIntent.putExtra("KEY_LNAME", lName);
+                        startActivity(payIntent);
                     }
                 });
         logoutButton.setOnClickListener(new View.OnClickListener() {
