@@ -47,7 +47,6 @@ public class ReceiptActivity extends AppCompatActivity {
         }
 
         //new HttpGetTask().execute();
-
         reasonTextView = findViewById(R.id.reason_text_view);
         amountTextView = findViewById(R.id.amount_paid_text_view);
 
@@ -86,18 +85,20 @@ public class ReceiptActivity extends AppCompatActivity {
 
     }
 
-    private class HttpGetTask extends AsyncTask<Void, Void, ResponseEntity<SecurePayments[]>> {
+    private class HttpGetTask extends AsyncTask<Void, Void, SecurePayments> {
 
         @Override
-        protected ResponseEntity<SecurePayments[]> doInBackground(Void... params){
+        protected SecurePayments doInBackground(Void... params){
 
             try
             {
                 final String URL = "http://10.0.2.2:8080/GetPayments?user=" + Integer.toString(userId);
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                ResponseEntity<SecurePayments[]> payments = restTemplate.getForEntity(URL, SecurePayments[].class);
-                return payments;
+                ArrayList<SecurePayments> paymentList = restTemplate.getForObject(URL, ArrayList.class);
+                SecurePayments payment = new SecurePayments(paymentList.get(paymentList.size() - 1).getCreditCardHolder(),paymentList.get(paymentList.size() - 1).getCreditCardNumber(), paymentList.get(paymentList.size() - 1).getExpirationDate(), paymentList.get(paymentList.size() - 1).getCvv(), paymentList.get(paymentList.size() - 1).getReason(), paymentList.get(paymentList.size() - 1).getAmount(), paymentList.get(paymentList.size() - 1).getUserID()  );
+                return payment;
+
             } catch (Exception e) {
                 Log.e("Record Endpoint GET", e.getMessage(), e);
             }
@@ -106,7 +107,10 @@ public class ReceiptActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(ResponseEntity payments) {
+        protected void onPostExecute(SecurePayments payment) {
+
+            reason = payment.getReason();
+            amount = payment.getAmount();
 
             reasonTextView = findViewById(R.id.reason_text_view);
             amountTextView = findViewById(R.id.amount_paid_text_view);
